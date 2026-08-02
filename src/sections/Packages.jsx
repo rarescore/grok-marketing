@@ -1,0 +1,7 @@
+import { useState } from 'react'
+import SectionIntro from '../components/SectionIntro'
+import { packages, websiteOffer } from '../data/content'
+export default function Packages({ chapter }) {
+  const [active, setActive] = useState(1); const plan = packages[active]
+  return <section id="packages" className="scene-section packages-section" data-chapter="4"><div className="section-shell"><SectionIntro chapter={chapter} align="right" /><div className="package-deck reveal-panel"><div className="package-tabs" role="tablist" aria-label="Marketing packages">{packages.map((item, index) => <button key={item.tier} className={active === index ? 'is-active' : ''} onClick={() => setActive(index)}><span>{String(index + 1).padStart(2, '0')}</span>{item.tier}{item.featured && <small>POPULAR</small>}</button>)}</div><article className="package-focus"><div className="package-focus__top"><span>{plan.tier}</span><strong>{plan.price}<small>{plan.suffix}</small></strong></div><h3>{plan.summary}</h3><ul>{plan.items.map((item) => <li key={item}>{item}</li>)}</ul><a className="button button--solid" href="#contact">Select {plan.tier} <span>↗</span></a></article><aside className="website-offer"><small>ONE-TIME BUILD</small><h3>{websiteOffer.title}</h3><strong>{websiteOffer.price}</strong><span>{websiteOffer.suffix}</span><p>{websiteOffer.copy}</p><a href="#contact">Request a website ↗</a></aside></div></div></section>
+}

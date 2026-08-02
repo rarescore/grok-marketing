@@ -1,0 +1,21 @@
+RS MARKETING — START HERE
+
+FASTEST VISUAL CHECK
+1. Open the preview folder.
+2. Open preview/index.html in Chrome or Safari.
+3. Scroll through the page. This is a dependency-free motion/layout prototype.
+
+FULL REACT + WEBGL PROJECT
+1. Open Terminal in this folder.
+2. Run: npm install
+3. Run: npm run dev
+4. Open the URL shown by Vite.
+
+IMPORTANT EDIT FILES
+- src/data/content.js — copy, services, prices, reviews, projects, articles
+- src/data/siteConfig.js — logo, email, colors, model path
+- src/experience/World.jsx — camera and scroll choreography
+- src/experience/SignalCraft.jsx — procedural aircraft
+- src/styles.css — visual design and responsive behavior
+
+READ DESIGN_MAP.md for the page-by-page animation map.

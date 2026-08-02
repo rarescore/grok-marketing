@@ -1,0 +1,51 @@
+rs-marketing-smooth-cinematic/
+├── DESIGN_MAP.md
+├── FILE_STRUCTURE.txt
+├── README.md
+├── index.html
+├── package.json
+├── vite.config.js
+├── preview/
+│   └── index.html                 # standalone no-install concept preview
+├── public/
+│   ├── assets/
+│   │   ├── rs-logo-transparent.png
+│   │   ├── graph-rank.jpg
+│   │   ├── graph-traffic.jpg
+│   │   └── review-1.jpg … review-6.jpg
+│   └── models/
+│       └── README.md
+└── src/
+    ├── App.jsx
+    ├── main.jsx
+    ├── styles.css
+    ├── components/
+    │   ├── CustomCursor.jsx
+    │   ├── ExperienceContext.jsx
+    │   ├── Header.jsx
+    │   ├── KineticHeading.jsx
+    │   ├── LiveActivity.jsx
+    │   ├── Preloader.jsx
+    │   ├── ProgressRail.jsx
+    │   ├── SceneLayer.jsx
+    │   └── SectionIntro.jsx
+    ├── data/
+    │   ├── content.js
+    │   └── siteConfig.js
+    ├── experience/
+    │   ├── math.js
+    │   ├── SceneObjects.jsx
+    │   ├── SignalCraft.jsx
+    │   └── World.jsx
+    ├── hooks/
+    │   └── usePerformanceProfile.js
+    └── sections/
+        ├── Hero.jsx
+        ├── Services.jsx
+        ├── Work.jsx
+        ├── Process.jsx
+        ├── Packages.jsx
+        ├── Results.jsx
+        ├── Testimonials.jsx
+        ├── Articles.jsx
+        └── Contact.jsx

@@ -1,0 +1,4 @@
+import SectionIntro from '../components/SectionIntro'
+export default function Hero({ chapter }) {
+  return <section id="hero" className="scene-section hero-section" data-chapter="0"><div className="section-shell section-shell--hero"><SectionIntro chapter={chapter}><div className="hero-actions reveal-copy"><a className="button button--solid" href="#contact">Build the system <span>↗</span></a><a className="button button--ghost" href="#services">Explore the experience</a></div></SectionIntro><div className="hero-orbit-label reveal-copy" aria-hidden="true"><span>SEARCH</span><span>CONTENT</span><span>AUTHORITY</span><span>CONVERSION</span></div><div className="hero-footer reveal-copy"><span>Scroll to move the signal</span><div className="hero-scroll"><i /></div><span>Los Angeles / Worldwide</span></div></div></section>
+}
