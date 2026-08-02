@@ -1,99 +1,10 @@
-(function () {
-  if (typeof THREE === 'undefined') return;
-  const canvas = document.getElementById('space');
-  if (!canvas) return;
-
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setClearColor(0x070b14, 1);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 200);
-  camera.position.z = 12;
-
-  // Stars
-  const starCount = 1400;
-  const starPos = new Float32Array(starCount * 3);
-  for (let i = 0; i < starCount; i++) {
-    starPos[i * 3] = (Math.random() - 0.5) * 80;
-    starPos[i * 3 + 1] = (Math.random() - 0.5) * 50;
-    starPos[i * 3 + 2] = (Math.random() - 0.5) * 60;
-  }
-  const starGeo = new THREE.BufferGeometry();
-  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-  const starMat = new THREE.PointsMaterial({
-    color: 0xffffff, size: 0.06, transparent: true, opacity: 0.85,
-    sizeAttenuation: true, blending: THREE.AdditiveBlending, depthWrite: false
-  });
-  const stars = new THREE.Points(starGeo, starMat);
-  scene.add(stars);
-
-  // Gold accent particles
-  const goldCount = 200;
-  const goldPos = new Float32Array(goldCount * 3);
-  for (let i = 0; i < goldCount; i++) {
-    goldPos[i * 3] = (Math.random() - 0.5) * 40;
-    goldPos[i * 3 + 1] = (Math.random() - 0.5) * 25;
-    goldPos[i * 3 + 2] = (Math.random() - 0.5) * 30;
-  }
-  const goldGeo = new THREE.BufferGeometry();
-  goldGeo.setAttribute('position', new THREE.BufferAttribute(goldPos, 3));
-  const goldMat = new THREE.PointsMaterial({
-    color: 0xeab308, size: 0.09, transparent: true, opacity: 0.5,
-    blending: THREE.AdditiveBlending, depthWrite: false
-  });
-  const golds = new THREE.Points(goldGeo, goldMat);
-  scene.add(golds);
-
-  // Distant planet
-  const planetGeo = new THREE.SphereGeometry(1.8, 32, 32);
-  const planetMat = new THREE.MeshBasicMaterial({
-    color: 0x1e3a5f, transparent: true, opacity: 0.35
-  });
-  const planet = new THREE.Mesh(planetGeo, planetMat);
-  planet.position.set(-9, -3, -18);
-  scene.add(planet);
-
-  // Soft glow sphere (black-hole-ish)
-  const holeGeo = new THREE.SphereGeometry(0.6, 24, 24);
-  const holeMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
-  const hole = new THREE.Mesh(holeGeo, holeMat);
-  hole.position.set(7, 2, -12);
-  scene.add(hole);
-
-  const ringGeo = new THREE.RingGeometry(0.9, 1.6, 48);
-  const ringMat = new THREE.MeshBasicMaterial({
-    color: 0xeab308, transparent: true, opacity: 0.25, side: THREE.DoubleSide
-  });
-  const ring = new THREE.Mesh(ringGeo, ringMat);
-  ring.position.copy(hole.position);
-  ring.rotation.x = Math.PI / 2.4;
-  scene.add(ring);
-
-  let mx = 0, my = 0;
-  document.addEventListener('mousemove', e => {
-    mx = (e.clientX / window.innerWidth - 0.5) * 2;
-    my = (e.clientY / window.innerHeight - 0.5) * 1.2;
-  });
-
-  function animate() {
-    requestAnimationFrame(animate);
-    const t = performance.now() * 0.0001;
-    stars.rotation.y = t * 0.3;
-    golds.rotation.y = -t * 0.5;
-    planet.rotation.y = t * 0.8;
-    ring.rotation.z = t * 1.2;
-    camera.position.x += (mx * 0.8 - camera.position.x) * 0.03;
-    camera.position.y += (-my * 0.5 - camera.position.y) * 0.03;
-    camera.lookAt(0, 0, 0);
-    renderer.render(scene, camera);
-  }
-  animate();
-
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-})();
+(()=>{if(!window.THREE)return;const c=document.querySelector('#space');if(!c)return;const r=new THREE.WebGLRenderer({canvas:c,antialias:true,alpha:false});r.setPixelRatio(Math.min(devicePixelRatio,2));r.setSize(innerWidth,innerHeight);r.outputEncoding=THREE.sRGBEncoding;const s=new THREE.Scene();s.fog=new THREE.FogExp2(0x06101e,.012);const cam=new THREE.PerspectiveCamera(58,innerWidth/innerHeight,.1,900);cam.position.set(0,1.5,18);const hemi=new THREE.HemisphereLight(0xaedfff,0x05070a,1.7);s.add(hemi);const sun=new THREE.DirectionalLight(0xffffff,2.3);sun.position.set(-10,14,10);s.add(sun);
+// stars with depth
+const n=5000,p=new Float32Array(n*3),col=new Float32Array(n*3);for(let i=0;i<n;i++){const z=-Math.random()*650+40;p[i*3]=(Math.random()-.5)*420;p[i*3+1]=(Math.random()-.5)*240;p[i*3+2]=z;const b=.65+Math.random()*.35;col.set([b,b*.95,1],i*3)}const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(p,3));g.setAttribute('color',new THREE.BufferAttribute(col,3));const stars=new THREE.Points(g,new THREE.PointsMaterial({size:.55,vertexColors:true,transparent:true,opacity:.9,sizeAttenuation:true}));s.add(stars);
+// earth atmosphere
+const earth=new THREE.Mesh(new THREE.SphereGeometry(13,64,64),new THREE.MeshStandardMaterial({color:0x16558e,roughness:.75,metalness:.05,emissive:0x052541,emissiveIntensity:.35}));earth.position.set(0,-16,-14);s.add(earth);const atm=new THREE.Mesh(new THREE.SphereGeometry(13.35,64,64),new THREE.MeshBasicMaterial({color:0x6fdcff,transparent:true,opacity:.12,side:THREE.BackSide}));atm.position.copy(earth.position);s.add(atm);
+// B2-like flying wing shape
+const shape=new THREE.Shape();shape.moveTo(0,2.2);shape.lineTo(9,-1.4);shape.lineTo(4.2,-.5);shape.lineTo(1.8,-2.2);shape.lineTo(0,-1.1);shape.lineTo(-1.8,-2.2);shape.lineTo(-4.2,-.5);shape.lineTo(-9,-1.4);shape.closePath();const bomber=new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:.35,bevelEnabled:true,bevelSize:.12,bevelThickness:.12,bevelSegments:3}),new THREE.MeshStandardMaterial({color:0x1a232d,metalness:.78,roughness:.3}));bomber.scale.set(.38,.38,.38);bomber.rotation.x=-Math.PI/2.8;bomber.position.set(0,-2.2,4);s.add(bomber);const engineGlow=new THREE.PointLight(0x73e8ff,4,18);engineGlow.position.set(0,-3,4.5);s.add(engineGlow);
+// planet and black hole
+const planet=new THREE.Mesh(new THREE.SphereGeometry(5.2,64,64),new THREE.MeshStandardMaterial({color:0xb27648,roughness:.8,metalness:.05,emissive:0x2c130a,emissiveIntensity:.25}));planet.position.set(-20,6,-95);s.add(planet);const hole=new THREE.Mesh(new THREE.SphereGeometry(3.4,64,64),new THREE.MeshBasicMaterial({color:0x000000}));hole.position.set(19,2,-170);s.add(hole);for(let i=0;i<4;i++){const ring=new THREE.Mesh(new THREE.TorusGeometry(5.5+i*.7,.32+i*.08,24,180),new THREE.MeshBasicMaterial({color:i%2?0x70e8ff:0xffb45d,transparent:true,opacity:.5-i*.07}));ring.position.copy(hole.position);ring.rotation.x=1.16;ring.rotation.z=i*.23;s.add(ring);ring.userData.spin=.0015+i*.0007}
+let mx=0,my=0,sy=0;addEventListener('mousemove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});addEventListener('scroll',()=>sy=scrollY,{passive:true});function tick(t){requestAnimationFrame(tick);const progress=Math.min(sy/(document.body.scrollHeight-innerHeight||1),1);cam.position.z=18-progress*145;cam.position.x+=(mx*3-cam.position.x)*.025;cam.position.y+=(1.5-my*2-cam.position.y)*.025;bomber.position.z=4-progress*75;bomber.position.y=-2.2+progress*14;bomber.rotation.z=Math.sin(t*.0006)*.08;bomber.rotation.y=progress*.42;earth.rotation.y=t*.00004;stars.position.z=(progress*50)%100;s.children.forEach(o=>{if(o.userData.spin)o.rotation.z+=o.userData.spin});r.render(s,cam)}tick(0);addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();r.setSize(innerWidth,innerHeight)})})();
