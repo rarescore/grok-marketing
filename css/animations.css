@@ -1,22 +1,12 @@
-/* Micro interactions & page transitions */
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
-  50% { box-shadow: 0 0 35px var(--accent-glow); }
+/* Magnetic + micro interactions */
+.magnetic { transition: transform 0.25s var(--ease); }
+
+/* Funnel animation trigger */
+.funnel-layer.visible {
+  /* width applied via JS */
 }
 
-.btn-loader {
-  width: 18px;
-  height: 18px;
-  border: 2px solid transparent;
-  border-top-color: currentColor;
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.price-card.featured:hover {
-  animation: pulse-glow 2.5s ease-in-out infinite;
+/* Demo score ring */
+.ring-fill.animated {
+  stroke-dashoffset: 65; /* ~80% */
 }
