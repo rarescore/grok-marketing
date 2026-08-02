@@ -1,0 +1,52 @@
+.pkgs { position: relative; z-index: 5; padding: 0 0 5rem; }
+.pkg-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; margin-bottom: 2.5rem;
+}
+.pkg {
+  background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+  padding: 1.5rem; display: flex; flex-direction: column; position: relative;
+  transition: 0.3s;
+}
+.pkg:hover { border-color: rgba(234,179,8,0.3); transform: translateY(-4px); }
+.pkg.featured {
+  border-color: rgba(234,179,8,0.4);
+  background: linear-gradient(165deg, rgba(234,179,8,0.08), var(--card));
+}
+.pkg-tag {
+  position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+  background: var(--gold); color: #0c0a00; font-size: 0.65rem; font-weight: 600;
+  padding: 0.2rem 0.65rem; border-radius: 999px;
+}
+.pkg-tier { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.3rem; }
+.pkg-price { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+.pkg-price span { font-size: 0.85rem; font-weight: 400; color: var(--muted); }
+.pkg p { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.1rem; }
+.pkg ul { flex-grow: 1; margin-bottom: 1.3rem; }
+.pkg li {
+  font-size: 0.84rem; color: var(--muted); padding: 0.3rem 0 0.3rem 1.1rem; position: relative;
+}
+.pkg li::before {
+  content: ""; position: absolute; left: 0; top: 0.65rem;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--gold); opacity: 0.7;
+}
+.pkg .btn { margin-top: auto; }
+.btn.full { width: 100%; }
+
+.web-offer {
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 16px;
+  padding: 1.7rem 2rem; flex-wrap: wrap;
+}
+.web-offer h3 { font-size: 1.15rem; margin-bottom: 0.3rem; }
+.web-offer p { color: var(--muted); font-size: 0.92rem; max-width: 440px; }
+.web-side { display: flex; align-items: center; gap: 1.2rem; }
+.web-price { font-size: 1.45rem; font-weight: 700; }
+.web-price span { font-size: 0.8rem; font-weight: 400; color: var(--dim); }
+
+@media (max-width: 1024px) { .pkg-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) {
+  .pkg-grid { grid-template-columns: 1fr; }
+  .web-offer { flex-direction: column; align-items: flex-start; }
+  .web-side { flex-direction: column; align-items: flex-start; width: 100%; }
+  .web-side .btn { width: 100%; }
+}

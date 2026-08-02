@@ -3,70 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Insights — RS Marketing</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/main.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/logo.svg">
+  <title>SEO Articles — RS Marketing</title>
+  <meta name="description" content="Professional SEO articles: why Google must understand your business, indexing, and how to stop being invisible.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/blog.css">
+  <link rel="icon" href="../assets/logo.png">
 </head>
 <body>
-  <canvas id="mist-canvas"></canvas>
-  <div class="noise-overlay"></div>
-  <header class="site-header">
-    <div class="container header-inner">
+  <canvas id="space"></canvas>
+  <div class="grain"></div>
+  <div id="toasts"></div>
+
+  <header class="header">
+    <div class="wrap header-in">
       <a href="../index.html" class="logo">
-        <img src="../assets/logo.svg" alt="RS Marketing" width="42" height="42">
-        <span class="logo-text">RS <em>Marketing</em></span>
+        <img src="../assets/logo.png" alt="RS" width="44" height="44">
+        <span>RS Marketing</span>
       </a>
-      <nav class="nav-desktop">
-        <a href="../index.html#packages">Packages</a>
-        <a href="../index.html#seo-tool">SEO Analyzer</a>
-        <a href="../pages/services.html">Services</a>
-        <a href="index.html">Insights</a>
-        <a href="../index.html#contact">Contact</a>
+      <nav class="nav">
+        <a href="../pages/system.html">The System</a>
+        <a href="../pages/packages.html">Packages</a>
+        <a href="../pages/seo-lab.html">SEO Lab</a>
+        <a href="../pages/reviews.html">Results</a>
+        <a href="index.html">Articles</a>
+        <a href="../pages/contact.html">Contact</a>
       </nav>
+      <a href="../pages/packages.html" class="btn">See Packages</a>
+      <button class="burger" id="burger"><span></span><span></span></button>
     </div>
   </header>
+  <div class="mobile" id="mobile">
+    <a href="../pages/system.html">The System</a>
+    <a href="../pages/packages.html">Packages</a>
+    <a href="../pages/seo-lab.html">SEO Lab</a>
+    <a href="../pages/reviews.html">Results</a>
+    <a href="index.html">Articles</a>
+    <a href="../pages/contact.html">Contact</a>
+  </div>
 
-  <main style="padding-top: 8rem; position: relative; z-index: 3;">
-    <section class="section">
-      <div class="container">
-        <div class="section-header">
-          <p class="eyebrow">High-Signal Thinking</p>
-          <h2>Insights that change how<br>you operate</h2>
-          <p class="section-sub">No recycled tips. Practical frameworks from the work we actually do.</p>
-        </div>
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <div class="section-label">Knowledge</div>
+        <h1>SEO articles that actually explain the system</h1>
+        <p>No fluff. Clear writing about how Google finds, understands, and ranks businesses.</p>
+      </div>
+    </section>
 
-        <div class="article-grid">
-          <a href="seo-in-the-age-of-ai-overviews.html" class="article-card">
-            <span class="article-tag">SEO · 2026</span>
-            <h3>SEO in the Age of AI Overviews: Why Extractability Beats Keyword Density</h3>
-            <p>Google and the major LLMs now reward content structured for retrieval, not just ranking. Here’s the practical shift.</p>
-          </a>
-          <a href="creative-testing-systems.html" class="article-card">
-            <span class="article-tag">Growth</span>
-            <h3>The Creative Testing System That Turns $1 into $4.7</h3>
-            <p>Most brands still treat creative as art. The ones scaling treat it as a scientific production line.</p>
-          </a>
-          <a href="online-presence-architecture.html" class="article-card">
-            <span class="article-tag">Strategy</span>
-            <h3>Online Presence as Infrastructure, Not Campaigns</h3>
-            <p>Why the highest-performing companies stopped thinking in “launches” and started building permanent growth systems.</p>
-          </a>
-        </div>
+    <section class="blog-list">
+      <div class="wrap">
+        <a href="why-google-must-know-you.html" class="blog-card">
+          <img src="../images/graph-traffic.jpg" alt="Traffic growth graph">
+          <div class="blog-card-body">
+            <div class="blog-meta">SEO Fundamentals · 8 min read</div>
+            <h2>Why Google must know exactly who you are and what you offer</h2>
+            <p>If Google cannot clearly understand your business, it cannot send the right people to your website. Here is how to fix that.</p>
+          </div>
+        </a>
+        <a href="lonely-star-problem.html" class="blog-card">
+          <img src="../images/graph-rank.jpg" alt="Ranking improvement graph">
+          <div class="blog-card-body">
+            <div class="blog-meta">Visibility · 6 min read</div>
+            <h2>The lonely star problem: why most websites stay invisible</h2>
+            <p>No backlinks, weak technical SEO, unclear content. Your site becomes a lonely star. Here is the path out.</p>
+          </div>
+        </a>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
+  <footer class="footer">
+    <div class="wrap footer-in">
       <div class="footer-brand">
-        <img src="../assets/logo.svg" alt="" width="32" height="32">
+        <img src="../assets/logo.png" alt="" width="32" height="32">
         <span>RS Marketing</span>
       </div>
-      <p class="footer-copy">© 2026 Rare Score Marketing</p>
+      <p>© 2026 Rare Score Marketing</p>
     </div>
   </footer>
-  <script src="../js/mist.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="../js/space.js"></script>
+  <script src="../js/toast.js"></script>
   <script src="../js/main.js"></script>
 </body>
 </html>

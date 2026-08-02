@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Packages — RS Marketing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/packages.css">
+  <link rel="icon" href="../assets/logo.png">
+</head>
+<body>
+  <canvas id="space"></canvas>
+  <div class="grain"></div>
+  <div id="toasts"></div>
+
+  <header class="header">
+    <div class="wrap header-in">
+      <a href="../index.html" class="logo">
+        <img src="../assets/logo.png" alt="RS" width="44" height="44">
+        <span>RS Marketing</span>
+      </a>
+      <nav class="nav">
+        <a href="system.html">The System</a>
+        <a href="packages.html">Packages</a>
+        <a href="seo-lab.html">SEO Lab</a>
+        <a href="reviews.html">Results</a>
+        <a href="../blog/index.html">Articles</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <a href="packages.html" class="btn">See Packages</a>
+      <button class="burger" id="burger"><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="mobile" id="mobile">
+    <a href="system.html">The System</a>
+    <a href="packages.html">Packages</a>
+    <a href="seo-lab.html">SEO Lab</a>
+    <a href="reviews.html">Results</a>
+    <a href="../blog/index.html">Articles</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <div class="section-label">Pricing</div>
+        <h1>Pick the system that matches your ambition</h1>
+        <p>Month-to-month after 90 days. Clear deliverables. No fluff.</p>
+      </div>
+    </section>
+
+    <section class="pkgs">
+      <div class="wrap">
+        <div class="pkg-grid">
+          <article class="pkg">
+            <div class="pkg-tier">Starter</div>
+            <div class="pkg-price">$500<span>/mo</span></div>
+            <p>Consistent presence. Stop looking inactive.</p>
+            <ul>
+              <li>8 AI-tested short videos / month</li>
+              <li>Instagram + TikTok management</li>
+              <li>Caption & hashtag systems</li>
+              <li>Monthly performance snapshot</li>
+              <li>Google Business Profile polish</li>
+            </ul>
+            <a href="contact.html?plan=starter" class="btn btn-ghost full">Select Starter</a>
+          </article>
+          <article class="pkg featured">
+            <div class="pkg-tag">Most Chosen</div>
+            <div class="pkg-tier">Growth</div>
+            <div class="pkg-price">$1,000<span>/mo</span></div>
+            <p>Turns attention into leads.</p>
+            <ul>
+              <li>16 premium videos + statics</li>
+              <li>Instagram, TikTok & Facebook</li>
+              <li>$500 ad management (you fund)</li>
+              <li>Lead magnet + basic funnel</li>
+              <li>Bi-weekly strategy calls</li>
+              <li>Full content calendar</li>
+            </ul>
+            <a href="contact.html?plan=growth" class="btn full">Select Growth</a>
+          </article>
+          <article class="pkg">
+            <div class="pkg-tier">Scale</div>
+            <div class="pkg-price">$2,000<span>/mo</span></div>
+            <p>Full-stack growth infrastructure.</p>
+            <ul>
+              <li>30+ high-converting creatives</li>
+              <li>Meta + TikTok ads management</li>
+              <li>Up to $2k spend management</li>
+              <li>Landing pages + lead systems</li>
+              <li>Weekly performance reviews</li>
+              <li>Competitor creative intel</li>
+            </ul>
+            <a href="contact.html?plan=scale" class="btn btn-ghost full">Select Scale</a>
+          </article>
+          <article class="pkg">
+            <div class="pkg-tier">Empire</div>
+            <div class="pkg-price">$5,000<span>/mo</span></div>
+            <p>We become your growth department.</p>
+            <ul>
+              <li>Unlimited creative (within reason)</li>
+              <li>Multi-platform ad orchestration</li>
+              <li>Dedicated strategist + creative lead</li>
+              <li>Custom funnels & CRM</li>
+              <li>Full SEO + authority program</li>
+              <li>Direct Slack access</li>
+            </ul>
+            <a href="contact.html?plan=empire" class="btn full">Apply for Empire</a>
+          </article>
+        </div>
+
+        <div class="web-offer">
+          <div>
+            <h3>100/100 SEO Website</h3>
+            <p>Conversion-optimized, technically perfect. Research, design, development, Core Web Vitals, schema, 30-day support.</p>
+          </div>
+          <div class="web-side">
+            <div class="web-price">$1,500 <span>one-time</span></div>
+            <a href="contact.html?plan=website" class="btn">Request Build</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-in">
+      <div class="footer-brand">
+        <img src="../assets/logo.png" alt="" width="32" height="32">
+        <span>RS Marketing</span>
+      </div>
+      <p>© 2026 Rare Score Marketing</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="../js/space.js"></script>
+  <script src="../js/toast.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
