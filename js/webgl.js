@@ -1,87 +1,34 @@
-/**
- * Three.js ambient particle field
- */
-(function () {
-  if (typeof THREE === 'undefined') return;
-  const canvas = document.getElementById('webgl');
-  if (!canvas) return;
 
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
-  camera.position.z = 5;
-
-  const count = 900;
-  const positions = new Float32Array(count * 3);
-  const sizes = new Float32Array(count);
-
-  for (let i = 0; i < count; i++) {
-    positions[i * 3] = (Math.random() - 0.5) * 18;
-    positions[i * 3 + 1] = (Math.random() - 0.5) * 12;
-    positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
-    sizes[i] = Math.random() * 2.5 + 0.5;
-  }
-
-  const geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  geo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-
-  const mat = new THREE.PointsMaterial({
-    color: 0xc9a227,
-    size: 0.04,
-    transparent: true,
-    opacity: 0.55,
-    sizeAttenuation: true,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
-  });
-
-  const points = new THREE.Points(geo, mat);
-  scene.add(points);
-
-  // Subtle second layer
-  const positions2 = new Float32Array(300 * 3);
-  for (let i = 0; i < 300; i++) {
-    positions2[i * 3] = (Math.random() - 0.5) * 14;
-    positions2[i * 3 + 1] = (Math.random() - 0.5) * 10;
-    positions2[i * 3 + 2] = (Math.random() - 0.5) * 8;
-  }
-  const geo2 = new THREE.BufferGeometry();
-  geo2.setAttribute('position', new THREE.BufferAttribute(positions2, 3));
-  const mat2 = new THREE.PointsMaterial({
-    color: 0xe0c15a,
-    size: 0.025,
-    transparent: true,
-    opacity: 0.3,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
-  });
-  const points2 = new THREE.Points(geo2, mat2);
-  scene.add(points2);
-
-  let mouseX = 0, mouseY = 0;
-  document.addEventListener('mousemove', e => {
-    mouseX = (e.clientX / window.innerWidth - 0.5) * 0.6;
-    mouseY = (e.clientY / window.innerHeight - 0.5) * 0.4;
-  });
-
-  function animate() {
-    requestAnimationFrame(animate);
-    const t = performance.now() * 0.00015;
-    points.rotation.y = t * 0.4 + mouseX * 0.3;
-    points.rotation.x = t * 0.15 + mouseY * 0.2;
-    points2.rotation.y = -t * 0.25 + mouseX * 0.15;
-    points2.rotation.x = t * 0.1;
-    renderer.render(scene, camera);
-  }
-  animate();
-
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
+(()=>{
+const canvas=document.getElementById('stage'); if(!canvas) return;
+const gl=canvas.getContext('webgl',{alpha:false,antialias:false,powerPreference:'high-performance'}); if(!gl){canvas.style.background='radial-gradient(circle at 50% 40%,#16303a,#02070b 70%)';return;}
+const vs=`attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}`;
+const fs=`precision highp float;
+uniform vec2 r;uniform float t;uniform vec2 m;uniform float s;uniform float scene;uniform float hover;
+#define PI 3.14159265359
+float hash21(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash21(i),hash21(i+vec2(1,0)),f.x),mix(hash21(i+vec2(0,1)),hash21(i+vec2(1,1)),f.x),f.y);}
+float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*noise(p);p=p*2.03+17.17;a*=.5;}return v;}
+mat2 rot(float a){float c=cos(a),q=sin(a);return mat2(c,-q,q,c);}
+vec3 stars(vec2 uv,float sp){vec3 c=vec3(0.);for(int i=0;i<3;i++){float z=float(i)+1.;vec2 p=uv*mix(55.,125.,z/3.)+vec2(t*.008*z,-t*.004*z)*sp;vec2 id=floor(p);vec2 gv=fract(p)-.5;float h=hash21(id);vec2 off=vec2(hash21(id+2.3),hash21(id+7.1))-.5;float d=length(gv-off*.55);float st=smoothstep(.055,.0,d)*smoothstep(.93,1.,h);vec3 col=mix(vec3(.45,.76,1.),vec3(1.,.9,.62),hash21(id+9.));c+=col*st*(.8+2.3*pow(h,18.));}return c;}
+vec3 planet(vec2 uv,vec2 c,float rad,vec3 base,vec3 lit){vec2 q=(uv-c)/rad;float d=dot(q,q);if(d>1.)return vec3(0.);float z=sqrt(max(0.,1.-d));vec3 n=normalize(vec3(q,z));vec3 L=normalize(vec3(-.7,.45,.8));float dif=max(dot(n,L),0.);float rim=pow(1.-z,3.);float tex=fbm(q*5.+vec2(t*.008,0.));vec3 col=mix(base,lit,dif)*(.62+.38*tex)+rim*vec3(.08,.55,.68);float night=smoothstep(.2,-.25,dot(n,L));float cities=smoothstep(.82,1.,noise(q*48.))*night*.8;return col+cities*vec3(1.,.58,.18);}
+float ellipse(vec2 p,vec2 ab){return abs(length(p/ab)-1.);}
+vec3 blackhole(vec2 uv,vec2 c,float scale){vec2 q=(uv-c)/scale;float rr=length(q);float ang=atan(q.y,q.x)+.42/(rr+.08)+t*.04;vec2 w=vec2(cos(ang),sin(ang))*rr;vec3 bg=stars(w*1.6,1.);float core=smoothstep(.32,.22,rr);float photon=exp(-abs(rr-.34)*45.);vec2 dq=rot(-.35)*q;float dr=length(vec2(dq.x,dq.y*3.4));float disk=exp(-abs(dr-.68)*22.)*smoothstep(.12,.45,rr);float bands=.55+.45*sin(ang*12.-t*3.+noise(q*6.)*8.);vec3 diskCol=mix(vec3(1.,.2,.02),vec3(1.,.92,.56),bands);vec3 col=bg*(1.-core)+diskCol*disk*1.8+vec3(1.,.55,.18)*photon*.7;col*=1.-core*.96;return col;}
+float wingMask(vec2 q){float front=smoothstep(.95,.75,q.x);float tail=smoothstep(-.78,-.62,q.x);float width=.52*(1.-smoothstep(-.05,.9,q.x))+.04;width*=smoothstep(-.78,-.45,q.x);float wing=smoothstep(.025,-.015,abs(q.y)-width)*front*tail;float body=smoothstep(.05,-.02,length(vec2((q.x-.08)*1.25,q.y*5.))-1.);return max(wing,body*.85);}
+vec3 homeScene(vec2 uv){float p=clamp(s,0.,1.);vec3 sky=mix(vec3(.015,.07,.12),vec3(.025,.19,.28),max(0.,uv.y*.5+.4));float cloud=fbm(vec2(uv.x*1.7,uv.y*3.3-t*.012)+vec2(0.,2.1));float cloudMask=smoothstep(.05,.9,cloud+(uv.y+.25)*-.8);sky=mix(sky,vec3(.65,.75,.76),cloudMask*.8*(1.-smoothstep(.22,.42,p)));vec3 spc=vec3(.004,.012,.02)+stars(uv*1.2,1.);float spaceMix=smoothstep(.18,.48,p);vec3 col=mix(sky,spc,spaceMix);vec3 pl=planet(uv,vec2(.6,-.65+p*.18),1.05,vec3(.015,.06,.08),vec3(.08,.25,.28));col+=pl*smoothstep(.22,.48,p)*(1.-smoothstep(.63,.77,p));vec3 bh=blackhole(uv,vec2(.34+.12*m.x,.05+.08*m.y),1.05);col=mix(col,bh,smoothstep(.63,.88,p));float pp=smoothstep(0.,.56,p);vec2 pos=mix(vec2(.15,-.72),vec2(.32,.12),pp);float sc=mix(1.15,.48,pp);vec2 q=rot(-.15+.2*pp)*(uv-pos)/sc;float wm=wingMask(q);float edge=smoothstep(.07,.0,abs(abs(q.y)-(.52*(1.-smoothstep(-.05,.9,q.x))+.04)));float panel=.5+.5*sin(q.x*34.+q.y*18.);vec3 metal=mix(vec3(.035,.05,.055),vec3(.3,.34,.32),.45+.35*q.y+.12*panel);metal+=edge*.18;float planeFade=1.-smoothstep(.5,.64,p);col=mix(col,metal,wm*planeFade);float trail=exp(-abs(q.y)*28.)*smoothstep(-2.4,-.2,q.x)*smoothstep(.1,-.25,q.x);col+=vec3(.55,.85,1.)*trail*.65*planeFade;float sun=pow(max(0.,1.-length(uv-vec2(.72,.55))),18.);col+=vec3(1.,.78,.42)*sun*(1.-smoothstep(.45,.7,p));return col;}
+vec3 systemScene(vec2 uv){vec3 col=vec3(.003,.012,.019)+stars(uv*1.2,1.);col+=planet(uv,vec2(0.,-.78),1.25,vec3(.012,.035,.06),vec3(.05,.22,.28));for(int i=0;i<7;i++){float fi=float(i);float a=t*(.08+.012*fi)+fi*.91;vec2 c=vec2(cos(a)*( .68+.035*fi),sin(a)*(.22+.018*fi)-.05);float ring=ellipse(rot(.12*fi)*uv,vec2(.68+.035*fi,.22+.018*fi));col+=vec3(.16,.55,.42)*smoothstep(.018,.0,ring)*.22;float node=exp(-length(uv-c)*80.);col+=mix(vec3(.3,1.,.75),vec3(1.,.78,.3),fract(fi*.37))*node;}float beam=exp(-abs(uv.x*.6+uv.y-.16)*65.)*smoothstep(.2,-.2,uv.x);col+=vec3(.3,.8,.65)*beam*.22;return col;}
+vec3 packageScene(vec2 uv){vec3 col=vec3(.005,.012,.018)+stars(uv*1.15,.75);vec2 c=vec2(.32+.06*m.x,.02);col+=planet(uv,c,.72,vec3(.035,.018,.025),vec3(.34,.12,.06));vec2 q=rot(-.28)*((uv-c));for(int i=0;i<5;i++){float fi=float(i);float rr=.78+fi*.085;float ring=ellipse(q,vec2(rr,.21+fi*.018));col+=mix(vec3(.28,.7,.45),vec3(1.,.62,.18),fi/5.)*smoothstep(.012,.0,ring)*(.38+.08*hover);}for(int i=0;i<5;i++){float fi=float(i);float a=t*(.12+.02*fi)+fi*1.27+hover*.35;vec2 n=c+rot(.28)*vec2(cos(a)*(.78+fi*.085),sin(a)*(.21+fi*.018));float g=exp(-length(uv-n)*100.);col+=mix(vec3(.5,1.,.72),vec3(1.,.75,.3),fi/5.)*g*1.5;}return col;}
+vec3 resultsScene(vec2 uv){vec3 col=blackhole(uv,vec2(.15+.08*m.x,.02),1.05);float ray=exp(-abs(uv.y-uv.x*.15-.22)*70.)*smoothstep(-.2,.7,uv.x);col+=vec3(.52,.95,.72)*ray*.35;return col;}
+vec3 seoScene(vec2 uv){vec3 col=vec3(.003,.012,.018)+stars(uv*.8,.4);vec2 p=uv;float rr=length(p);float a=atan(p.y,p.x);float tunnel=abs(fract(1.25/(rr+.15)-t*.12)-.5);float radial=abs(fract(a/PI*7.+t*.03)-.5);col+=vec3(.16,.62,.52)*smoothstep(.045,.0,min(tunnel,radial))*(1.-smoothstep(.2,1.4,rr))*.7;for(int i=0;i<10;i++){float fi=float(i);float z=fract(fi*.173+t*.06);vec2 n=vec2(cos(fi*2.2+t*.08),sin(fi*1.7-t*.05))*(.1+z*1.25);float g=exp(-length(uv-n)*75.)*(1.-z);col+=mix(vec3(.2,.9,.75),vec3(.55,.75,1.),z)*g;}return col;}
+vec3 contactScene(vec2 uv){vec3 col=vec3(.002,.009,.014)+stars(uv*1.2,1.);vec2 q=uv-vec2(.22+.08*m.x,.0);float rr=length(q);float a=atan(q.y,q.x);float bands=.5+.5*sin(28.*rr-t*4.+sin(a*6.)*1.5);float portal=exp(-abs(rr-.62)*18.)*(.4+.6*bands);col+=mix(vec3(.14,.8,.7),vec3(.62,.85,1.),bands)*portal;float core=smoothstep(.62,.05,rr);vec2 w=vec2(cos(a+t*.15/(rr+.1)),sin(a+t*.15/(rr+.1)))*rr;col+=stars(w*2.,1.)*core*1.2;col*=1.-smoothstep(.3,.0,rr)*.72;return col;}
+vec3 blogScene(vec2 uv){vec3 col=vec3(.003,.012,.018)+stars(uv*1.15,.65);for(int i=0;i<11;i++){float fi=float(i);vec2 n=vec2(sin(fi*17.13)*.78,cos(fi*11.31)*.58);float g=exp(-length(uv-n)*90.);col+=mix(vec3(.25,.85,.67),vec3(.55,.72,1.),fract(fi*.31))*g;float line=abs(cross(vec3(normalize(n),0.),vec3(uv,0.)).z);float along=dot(uv,n)/dot(n,n);col+=vec3(.12,.42,.38)*smoothstep(.008,.0,line)*step(0.,along)*step(along,1.)*.18;}return col;}
+void main(){vec2 uv=(gl_FragCoord.xy*2.-r.xy)/min(r.x,r.y);uv.x+=m.x*.035;uv.y+=m.y*.025;vec3 col;if(scene<.5)col=homeScene(uv);else if(scene<1.5)col=systemScene(uv);else if(scene<2.5)col=packageScene(uv);else if(scene<3.5)col=resultsScene(uv);else if(scene<4.5)col=seoScene(uv);else if(scene<5.5)col=contactScene(uv);else col=blogScene(uv);float vig=smoothstep(1.6,.25,length(uv*.68));col*=.55+.45*vig;col=pow(col,vec3(.92));gl_FragColor=vec4(col,1.);}`;
+function shader(type,src){const sh=gl.createShader(type);gl.shaderSource(sh,src);gl.compileShader(sh);if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS)){console.error(gl.getShaderInfoLog(sh));return null;}return sh}
+const p=gl.createProgram();gl.attachShader(p,shader(gl.VERTEX_SHADER,vs));gl.attachShader(p,shader(gl.FRAGMENT_SHADER,fs));gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS)){console.error(gl.getProgramInfoLog(p));return}gl.useProgram(p);
+const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);const al=gl.getAttribLocation(p,'a');gl.enableVertexAttribArray(al);gl.vertexAttribPointer(al,2,gl.FLOAT,false,0,0);
+const ur=gl.getUniformLocation(p,'r'),ut=gl.getUniformLocation(p,'t'),um=gl.getUniformLocation(p,'m'),us=gl.getUniformLocation(p,'s'),usc=gl.getUniformLocation(p,'scene'),uh=gl.getUniformLocation(p,'hover');
+const map={home:0,system:1,packages:2,results:3,seo:4,contact:5,blog:6,article:6};let sceneId=map[document.body.dataset.scene]??0;let mx=0,my=0,tmx=0,tmy=0;
+addEventListener('pointermove',e=>{tmx=e.clientX/innerWidth*2-1;tmy=-(e.clientY/innerHeight*2-1)},{passive:true});
+function resize(){const d=Math.min(devicePixelRatio||1,1.65);const w=Math.floor(innerWidth*d),h=Math.floor(innerHeight*d);if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';gl.viewport(0,0,w,h)}}addEventListener('resize',resize);resize();
+let start=performance.now();function frame(now){mx+=(tmx-mx)*.035;my+=(tmy-my)*.035;gl.uniform2f(ur,canvas.width,canvas.height);gl.uniform1f(ut,(now-start)/1000);gl.uniform2f(um,mx,my);gl.uniform1f(us,window.RS?.progress||0);gl.uniform1f(usc,sceneId);gl.uniform1f(uh,window.RS?.planHover||0);gl.drawArrays(gl.TRIANGLES,0,6);requestAnimationFrame(frame)}requestAnimationFrame(frame);
 })();

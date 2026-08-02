@@ -1,43 +1,17 @@
-# RS Marketing — Rare Score Marketing Website
+# RS Marketing — Futuristic Interactive Build
 
-Premium digital marketing agency website for RS Marketing (Rare Score Marketing).
+Open `index.html` in a modern browser or run a local static server. The site uses a custom raw WebGL shader engine, so there are no external animation libraries or image dependencies.
 
-## Features
+Recommended local preview:
 
-- Dark luxury design system with gold accent
-- Mouse-following mist / particle trail (desktop)
-- Full subscription package pricing ($500 / $1,000 / $2,000 / $5,000)
-- 100/100 SEO website one-time offer ($1,500)
-- **Advanced SEO Analyzer** — multi-category 2026 scoring engine (Technical, On-Page, Content, Performance, AI/GEO, Accessibility) with prioritized issues and calculated fix fee
-- High-signal blog articles
-- Services, FAQ, Contact + custom work request
-- Fully responsive
-- Contact form (demo)
-
-## Tech
-
-Static HTML / CSS / JS. No build step required. Deploy to any static host or GitHub Pages.
-
-## Structure
-
-```
-rs-marketing/
-├── index.html
-├── css/
-├── js/
-│   ├── mist.js          # particle trail
-│   ├── seo-analyzer.js  # advanced scoring engine
-│   └── main.js
-├── assets/
-│   └── logo.svg
-├── pages/
-│   ├── services.html
-│   └── faq.html
-└── blog/
-    ├── index.html
-    └── [3 articles]
+```bash
+python3 -m http.server 8080
 ```
 
-## Contact
+Then open `http://localhost:8080`.
 
-hello.rarescore@gmail.com
+Before publishing:
+- Replace `YOUR-DOMAIN.com` in `sitemap.xml` and `robots.txt`.
+- Connect the contact form to a real backend or CRM if you do not want to use the email-client fallback.
+- Replace illustrative metrics and anonymized sample review wording with verified evidence.
+- Test on the final hosting environment and mobile devices.
