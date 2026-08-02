@@ -4,199 +4,166 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RS Marketing — Rare Score | Premium Growth Systems</title>
-  <meta name="description" content="Premium AI-powered social media, SEO and growth systems. Experience the difference.">
+  <meta name="description" content="Premium AI-powered growth systems. Cinematic marketing experiences that convert.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/shop.css">
-  <link rel="stylesheet" href="css/animations.css">
-  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <link rel="stylesheet" href="css/effects.css">
+  <link rel="icon" href="assets/logo.jpg">
 </head>
 <body>
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-follower" id="cursor-follower"></div>
-  <canvas id="bg-canvas"></canvas>
+  <!-- Advanced cursor system -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+  <canvas id="trail-canvas"></canvas>
+
+  <!-- Ambient background -->
+  <canvas id="ambient"></canvas>
+  <div class="vignette"></div>
   <div class="noise"></div>
 
-  <!-- Header -->
+  <!-- Social proof toasts -->
+  <div id="toast-container"></div>
+
   <header class="header" id="header">
     <div class="container header-inner">
-      <a href="index.html" class="logo">
-        <img src="assets/logo.svg" alt="RS" width="36" height="36">
-        <span>RS <em>Marketing</em></span>
+      <a href="/" class="logo">
+        <img src="assets/logo.jpg" alt="RS Marketing" width="42" height="42">
+        <div class="logo-text">
+          <span class="logo-main">RS Marketing</span>
+          <span class="logo-sub">Rare Score</span>
+        </div>
       </a>
       <nav class="nav">
-        <a href="#experience">Experience</a>
         <a href="#packages">Packages</a>
-        <a href="#how-it-works">How it works</a>
-        <a href="#seo-lab">SEO Lab</a>
+        <a href="#system">The System</a>
+        <a href="#seo">SEO Lab</a>
         <a href="#contact">Contact</a>
       </nav>
-      <a href="#packages" class="btn btn-gold magnetic">Shop Packages</a>
-      <button class="menu-btn" id="menu-btn" aria-label="Menu"><span></span><span></span></button>
+      <a href="#packages" class="btn btn-primary magnetic">View Packages</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span></button>
     </div>
   </header>
 
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="#experience">Experience</a>
+  <div class="mobile-nav" id="mobile-nav">
     <a href="#packages">Packages</a>
-    <a href="#how-it-works">How it works</a>
-    <a href="#seo-lab">SEO Lab</a>
+    <a href="#system">The System</a>
+    <a href="#seo">SEO Lab</a>
     <a href="#contact">Contact</a>
-    <a href="#packages" class="btn btn-gold">Shop Packages</a>
+    <a href="#packages" class="btn btn-primary">View Packages</a>
   </div>
 
   <main>
     <!-- HERO -->
     <section class="hero">
-      <div class="container hero-content">
-        <div class="hero-badge reveal">Rare Score Marketing</div>
-        <h1 class="hero-title reveal">
-          Growth that feels<br>
-          <span class="gold-gradient">inevitable</span>
-        </h1>
-        <p class="hero-sub reveal">
-          We design and run premium AI video systems, social presence, 
-          and SEO architectures for brands that refuse to look ordinary.
-        </p>
-        <div class="hero-actions reveal">
-          <a href="#packages" class="btn btn-gold magnetic">Explore Packages</a>
-          <a href="#seo-lab" class="btn btn-ghost magnetic">Try Free SEO Score →</a>
-        </div>
-        <div class="hero-stats reveal">
-          <div class="stat"><strong data-count="100">0</strong><span>100/100 sites</span></div>
-          <div class="stat"><strong data-count="4.9">0</strong><span>Client rating</span></div>
-          <div class="stat"><strong data-count="2.4">0</strong><span>$M+ ad spend</span></div>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-      </div>
-    </section>
-
-    <!-- EXPERIENCE STRIP -->
-    <section id="experience" class="section experience">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">The Feeling</p>
-          <h2 class="reveal">What it feels like<br>to work with us</h2>
-        </div>
-        <div class="exp-grid">
-          <div class="exp-card reveal">
-            <div class="exp-icon">01</div>
-            <h3>Clarity first</h3>
-            <p>We explain every decision in plain language. No jargon walls. You always know why something is being done.</p>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="hero-badge">Rare Score Marketing</div>
+          <h1>
+            Growth systems<br>
+            that feel <span class="gradient">inevitable</span>
+          </h1>
+          <p class="hero-lead">
+            We build and run premium AI video systems, social presence, 
+            and SEO architectures for brands that refuse to look average.
+          </p>
+          <div class="hero-cta">
+            <a href="#packages" class="btn btn-primary magnetic">Explore Packages</a>
+            <a href="#seo" class="btn btn-ghost magnetic">Free SEO Score →</a>
           </div>
-          <div class="exp-card reveal">
-            <div class="exp-icon">02</div>
-            <h3>Creative that performs</h3>
-            <p>AI-assisted production tested against real audience response before it ever scales. Beautiful and effective.</p>
+          <div class="hero-proof">
+            <div class="proof-item"><strong>100/100</strong> sites delivered</div>
+            <div class="proof-item"><strong>4.9★</strong> average</div>
+            <div class="proof-item"><strong>$2.4M+</strong> ad spend managed</div>
           </div>
-          <div class="exp-card reveal">
-            <div class="exp-icon">03</div>
-            <h3>Systems, not campaigns</h3>
-            <p>We build permanent growth infrastructure. The work compounds every month instead of restarting.</p>
-          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-glow"></div>
+          <img src="assets/logo.jpg" alt="" class="hero-logo-large">
         </div>
       </div>
     </section>
 
-    <!-- HOW SEO & TRAFFIC WORKS (simple animated explanations) -->
-    <section id="how-it-works" class="section explain">
+    <!-- SYSTEM EXPLAINER -->
+    <section id="system" class="section system">
       <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Simple Truths</p>
-          <h2 class="reveal">How this actually works</h2>
-          <p class="section-sub reveal">Two short visual stories. No fluff.</p>
-        </div>
+        <div class="section-label">How it actually works</div>
+        <h2 class="section-title">Two simple truths</h2>
 
-        <!-- Traffic Funnel Animation -->
-        <div class="explain-block reveal">
-          <div class="explain-text">
-            <h3>Website traffic is a funnel</h3>
-            <p>People discover you → they land → some explore → a few take action. Most sites leak at every step. We tighten the leaks.</p>
+        <div class="system-row">
+          <div class="system-text">
+            <h3>Traffic is a funnel</h3>
+            <p>People discover you → land → explore → act. Most sites leak at every step. We close the leaks.</p>
             <ul>
               <li>Discovery (SEO + social + ads)</li>
-              <li>Landing experience (speed + clarity)</li>
-              <li>Trust signals + proof</li>
-              <li>Clear next step</li>
+              <li>Landing clarity & speed</li>
+              <li>Trust + proof</li>
+              <li>Clear next action</li>
             </ul>
           </div>
-          <div class="funnel-visual" id="funnel">
-            <div class="funnel-layer" data-width="100"><span>Discovery</span></div>
-            <div class="funnel-layer" data-width="72"><span>Landing</span></div>
-            <div class="funnel-layer" data-width="48"><span>Interest</span></div>
-            <div class="funnel-layer" data-width="28"><span>Action</span></div>
-            <div class="funnel-layer" data-width="12"><span>Customer</span></div>
+          <div class="funnel" id="funnel">
+            <div class="funnel-step" style="--w:100%"><span>Discovery</span></div>
+            <div class="funnel-step" style="--w:74%"><span>Landing</span></div>
+            <div class="funnel-step" style="--w:51%"><span>Interest</span></div>
+            <div class="funnel-step" style="--w:29%"><span>Action</span></div>
+            <div class="funnel-step" style="--w:14%"><span>Customer</span></div>
           </div>
         </div>
 
-        <!-- SEO Score Story -->
-        <div class="explain-block reverse reveal">
-          <div class="explain-text">
-            <h3>SEO is a score that compounds</h3>
-            <p>Technical health + content clarity + authority signals. Fix the foundation once, then keep adding value. Rankings and AI citations follow.</p>
+        <div class="system-row reverse">
+          <div class="system-text">
+            <h3>SEO compounds</h3>
+            <p>Technical health + clear content + authority. Fix the foundation, then keep adding value. Rankings and AI citations follow.</p>
             <ul>
-              <li>Technical (speed, structure, crawlability)</li>
-              <li>On-page (titles, headings, intent match)</li>
-              <li>Content depth & extractability</li>
-              <li>Trust & authority over time</li>
+              <li>Technical foundation</li>
+              <li>On-page clarity</li>
+              <li>Extractable content</li>
+              <li>Authority over time</li>
             </ul>
           </div>
-          <div class="score-visual">
-            <div class="score-ring-lg">
+          <div class="score-demo">
+            <div class="score-circle">
               <svg viewBox="0 0 120 120">
-                <circle cx="60" cy="60" r="52" class="ring-track"/>
-                <circle cx="60" cy="60" r="52" class="ring-fill" id="demo-ring"/>
+                <circle cx="60" cy="60" r="52" class="track"/>
+                <circle cx="60" cy="60" r="52" class="progress" id="score-progress"/>
               </svg>
-              <div class="score-num" id="demo-score">0</div>
+              <div class="score-value" id="score-value">0</div>
             </div>
-            <p class="score-label">Average client lift after 90 days</p>
+            <p>Typical 90-day lift</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SHOPPING EXPERIENCE - PACKAGES -->
-    <section id="packages" class="section shop">
+    <!-- PACKAGES (Shopping) -->
+    <section id="packages" class="section packages">
       <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Choose Your System</p>
-          <h2 class="reveal">Shop the packages</h2>
-          <p class="section-sub reveal">Pick the altitude that matches where you want to go. Everything is month-to-month after 90 days.</p>
-        </div>
+        <div class="section-label">Choose your system</div>
+        <h2 class="section-title">Packages</h2>
+        <p class="section-desc">Month-to-month after 90 days. Select one to continue.</p>
 
-        <div class="shop-grid">
-          <!-- Starter -->
-          <article class="product-card" data-package="starter">
-            <div class="product-top">
-              <span class="product-tier">Starter</span>
-              <div class="product-price">$500<span>/mo</span></div>
-            </div>
-            <p class="product-desc">Consistent presence. Perfect if you’re ready to stop looking inactive.</p>
-            <ul class="product-features">
+        <div class="package-grid">
+          <article class="package" data-id="starter" data-name="Starter" data-price="500">
+            <div class="package-tier">Starter</div>
+            <div class="package-price">$500<span>/mo</span></div>
+            <p class="package-desc">Consistent presence. Stop looking inactive.</p>
+            <ul>
               <li>8 AI-tested short videos / month</li>
               <li>Instagram + TikTok management</li>
               <li>Caption & hashtag systems</li>
-              <li>Monthly snapshot report</li>
+              <li>Monthly performance snapshot</li>
               <li>Google Business Profile polish</li>
             </ul>
-            <button class="btn btn-outline full magnetic add-btn" data-id="starter" data-name="Starter" data-price="500">
-              Select Starter
-            </button>
+            <button class="btn btn-outline full select-btn">Select Starter</button>
           </article>
 
-          <!-- Growth -->
-          <article class="product-card featured" data-package="growth">
-            <div class="product-badge">Most Popular</div>
-            <div class="product-top">
-              <span class="product-tier">Growth</span>
-              <div class="product-price">$1,000<span>/mo</span></div>
-            </div>
-            <p class="product-desc">The system that starts turning attention into leads.</p>
-            <ul class="product-features">
+          <article class="package featured" data-id="growth" data-name="Growth" data-price="1000">
+            <div class="package-badge">Most Chosen</div>
+            <div class="package-tier">Growth</div>
+            <div class="package-price">$1,000<span>/mo</span></div>
+            <p class="package-desc">Turns attention into leads.</p>
+            <ul>
               <li>16 premium videos + statics</li>
               <li>Instagram, TikTok & Facebook</li>
               <li>$500 ad management (you fund)</li>
@@ -204,19 +171,14 @@
               <li>Bi-weekly strategy calls</li>
               <li>Full content calendar</li>
             </ul>
-            <button class="btn btn-gold full magnetic add-btn" data-id="growth" data-name="Growth" data-price="1000">
-              Select Growth
-            </button>
+            <button class="btn btn-primary full select-btn">Select Growth</button>
           </article>
 
-          <!-- Scale -->
-          <article class="product-card" data-package="scale">
-            <div class="product-top">
-              <span class="product-tier">Scale</span>
-              <div class="product-price">$2,000<span>/mo</span></div>
-            </div>
-            <p class="product-desc">Full-stack growth for brands treating marketing as infrastructure.</p>
-            <ul class="product-features">
+          <article class="package" data-id="scale" data-name="Scale" data-price="2000">
+            <div class="package-tier">Scale</div>
+            <div class="package-price">$2,000<span>/mo</span></div>
+            <p class="package-desc">Full-stack growth infrastructure.</p>
+            <ul>
               <li>30+ high-converting creatives</li>
               <li>Meta + TikTok ads management</li>
               <li>Up to $2k spend management</li>
@@ -224,19 +186,14 @@
               <li>Weekly performance reviews</li>
               <li>Competitor creative intel</li>
             </ul>
-            <button class="btn btn-outline full magnetic add-btn" data-id="scale" data-name="Scale" data-price="2000">
-              Select Scale
-            </button>
+            <button class="btn btn-outline full select-btn">Select Scale</button>
           </article>
 
-          <!-- Empire -->
-          <article class="product-card empire" data-package="empire">
-            <div class="product-top">
-              <span class="product-tier">Empire</span>
-              <div class="product-price">$5,000<span>/mo</span></div>
-            </div>
-            <p class="product-desc">White-glove. We become your external growth department.</p>
-            <ul class="product-features">
+          <article class="package" data-id="empire" data-name="Empire" data-price="5000">
+            <div class="package-tier">Empire</div>
+            <div class="package-price">$5,000<span>/mo</span></div>
+            <p class="package-desc">We become your growth department.</p>
+            <ul>
               <li>Unlimited creative (within reason)</li>
               <li>Multi-platform ad orchestration</li>
               <li>Dedicated strategist + creative lead</li>
@@ -244,65 +201,59 @@
               <li>Full SEO + authority program</li>
               <li>Direct Slack access</li>
             </ul>
-            <button class="btn btn-gold full magnetic add-btn" data-id="empire" data-name="Empire" data-price="5000">
-              Apply for Empire
-            </button>
+            <button class="btn btn-primary full select-btn">Apply for Empire</button>
           </article>
         </div>
 
-        <!-- One-time website -->
-        <div class="one-time reveal">
-          <div class="one-time-info">
+        <div class="website-offer">
+          <div>
             <h3>100/100 SEO Website</h3>
-            <p>A conversion-optimized, technically perfect site. Research, design, development, Core Web Vitals, schema, 30-day support.</p>
+            <p>Conversion-optimized, technically perfect. Research, design, development, Core Web Vitals, schema, 30-day support.</p>
           </div>
-          <div class="one-time-action">
-            <div class="one-time-price">$1,500 <span>one-time</span></div>
-            <button class="btn btn-gold magnetic add-btn" data-id="website" data-name="100/100 SEO Website" data-price="1500">
-              Request Build
-            </button>
+          <div class="website-action">
+            <div class="website-price">$1,500 <span>one-time</span></div>
+            <button class="btn btn-primary select-btn" data-id="website" data-name="100/100 SEO Website" data-price="1500">Request Build</button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CART / CHECKOUT DRAWER -->
-    <div class="cart-drawer" id="cart-drawer">
-      <div class="cart-header">
-        <h3>Your Selection</h3>
-        <button class="cart-close" id="cart-close">×</button>
+    <!-- CART DRAWER -->
+    <div class="drawer" id="drawer">
+      <div class="drawer-header">
+        <h3>Your selection</h3>
+        <button class="drawer-close" id="drawer-close">×</button>
       </div>
-      <div class="cart-body" id="cart-body">
-        <p class="cart-empty">No package selected yet.</p>
+      <div class="drawer-body" id="drawer-body">
+        <p class="drawer-empty">Nothing selected yet.</p>
       </div>
-      <div class="cart-footer" id="cart-footer" hidden>
-        <div class="cart-total">
+      <div class="drawer-footer" id="drawer-footer" hidden>
+        <div class="drawer-total">
           <span>Total</span>
-          <strong id="cart-total-price">$0</strong>
+          <strong id="drawer-total">$0</strong>
         </div>
-        <p class="cart-note">Next step: quick details → we confirm & send secure payment link (Stripe).</p>
-        <button class="btn btn-gold full" id="checkout-btn">Continue to Checkout</button>
+        <p class="drawer-note">Next: quick details → secure Stripe payment link.</p>
+        <button class="btn btn-primary full" id="checkout-btn">Continue to Checkout</button>
       </div>
     </div>
-    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="drawer-overlay" id="drawer-overlay"></div>
 
     <!-- SEO LAB -->
-    <section id="seo-lab" class="section seo-lab">
+    <section id="seo" class="section seo">
       <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Free Diagnostic</p>
-          <h2 class="reveal">SEO Lab</h2>
-          <p class="section-sub reveal">Paste any website. Get a clear 2026-ready score, priority issues, and a realistic fix investment.</p>
-        </div>
-        <div class="lab-box reveal">
-          <form id="seo-form" class="lab-form">
+        <div class="section-label">Free diagnostic</div>
+        <h2 class="section-title">SEO Lab</h2>
+        <p class="section-desc">Paste any URL. Get a clear 2026 score, priority issues, and realistic fix investment.</p>
+
+        <div class="seo-box">
+          <form id="seo-form" class="seo-form">
             <input type="url" id="seo-url" placeholder="https://yourwebsite.com" required>
-            <button type="submit" class="btn btn-gold" id="analyze-btn">
+            <button type="submit" class="btn btn-primary" id="analyze-btn">
               <span class="btn-text">Analyze</span>
-              <span class="btn-loader" hidden></span>
+              <span class="btn-spin" hidden></span>
             </button>
           </form>
-          <div id="seo-results" class="lab-results" hidden></div>
+          <div id="seo-results" class="seo-results" hidden></div>
         </div>
       </div>
     </section>
@@ -310,20 +261,18 @@
     <!-- TESTIMONIALS -->
     <section class="section testimonials">
       <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Outcomes</p>
-          <h2 class="reveal">What clients actually say</h2>
-        </div>
+        <div class="section-label">Outcomes</div>
+        <h2 class="section-title">What clients say</h2>
         <div class="testi-grid">
-          <blockquote class="testi reveal">
+          <blockquote>
             <p>“From random posting to a predictable lead machine. The videos outperform what we used to shoot ourselves.”</p>
             <footer><strong>Marcus Chen</strong> · Atlas Fitness</footer>
           </blockquote>
-          <blockquote class="testi reveal">
-            <p>“Their SEO rebuild moved us from page 4 to consistent top-3 for our money keywords in under four months.”</p>
+          <blockquote>
+            <p>“SEO rebuild took us from page 4 to consistent top-3 for our money keywords in under four months.”</p>
             <footer><strong>Sofia Reyes</strong> · Lumen Legal</footer>
           </blockquote>
-          <blockquote class="testi reveal">
+          <blockquote>
             <p>“$5k felt expensive until the first 90 days delivered more qualified calls than the previous year.”</p>
             <footer><strong>Jordan Hale</strong> · Northline Capital</footer>
           </blockquote>
@@ -331,22 +280,22 @@
       </div>
     </section>
 
-    <!-- CONTACT / FINAL CTA -->
+    <!-- CONTACT -->
     <section id="contact" class="section contact">
       <div class="container">
-        <div class="contact-wrap reveal">
+        <div class="contact-card">
           <div class="contact-left">
-            <p class="eyebrow">Next Step</p>
+            <div class="section-label">Next step</div>
             <h2>Ready when you are</h2>
-            <p>Select a package above or tell us what you need. We reply within a few business hours.</p>
-            <a href="mailto:hello.rarescore@gmail.com" class="contact-email">hello.rarescore@gmail.com</a>
+            <p>Select a package or tell us what you need. We reply within a few business hours.</p>
+            <a href="mailto:hello.rarescore@gmail.com" class="email-link">hello.rarescore@gmail.com</a>
           </div>
           <form class="contact-form" id="contact-form">
             <input type="text" name="name" placeholder="Your name" required>
             <input type="email" name="email" placeholder="Work email" required>
             <input type="text" name="company" placeholder="Company">
             <select name="interest">
-              <option value="">What are you interested in?</option>
+              <option value="">Interested in…</option>
               <option value="starter">Starter ($500)</option>
               <option value="growth">Growth ($1,000)</option>
               <option value="scale">Scale ($2,000)</option>
@@ -355,8 +304,8 @@
               <option value="custom">Something custom</option>
             </select>
             <textarea name="message" rows="3" placeholder="Anything we should know?"></textarea>
-            <button type="submit" class="btn btn-gold full">Send Message</button>
-            <p class="form-success" id="form-success" hidden>Got it. We’ll be in touch shortly.</p>
+            <button type="submit" class="btn btn-primary full">Send Message</button>
+            <p class="form-ok" id="form-ok" hidden>Got it. We’ll be in touch shortly.</p>
           </form>
         </div>
       </div>
@@ -366,32 +315,33 @@
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <img src="assets/logo.svg" alt="" width="28" height="28">
+        <img src="assets/logo.jpg" alt="" width="32" height="32">
         <span>RS Marketing</span>
       </div>
-      <p>© 2026 Rare Score Marketing · hello.rarescore@gmail.com</p>
+      <p>© 2026 Rare Score Marketing</p>
     </div>
   </footer>
 
-  <!-- Checkout Modal -->
-  <div class="modal" id="checkout-modal">
+  <!-- Checkout modal -->
+  <div class="modal" id="modal">
     <div class="modal-box">
       <button class="modal-close" id="modal-close">×</button>
       <h3>Almost there</h3>
-      <p class="modal-sub">We’ll confirm details and send a secure Stripe payment link.</p>
+      <p>We’ll confirm details and send a secure Stripe payment link.</p>
       <form id="checkout-form">
         <input type="text" name="name" placeholder="Full name" required>
         <input type="email" name="email" placeholder="Email" required>
         <input type="text" name="company" placeholder="Company (optional)">
         <textarea name="notes" rows="2" placeholder="Anything we should know?"></textarea>
-        <button type="submit" class="btn btn-gold full">Request Payment Link</button>
+        <button type="submit" class="btn btn-primary full">Request Payment Link</button>
       </form>
-      <p class="modal-success" id="modal-success" hidden>Request received. Check your email shortly for the secure payment link.</p>
+      <p class="modal-ok" id="modal-ok" hidden>Request received. Check your email for the secure payment link.</p>
     </div>
   </div>
 
-  <script src="js/bg.js"></script>
+  <script src="js/ambient.js"></script>
   <script src="js/cursor.js"></script>
+  <script src="js/toast.js"></script>
   <script src="js/shop.js"></script>
   <script src="js/seo.js"></script>
   <script src="js/main.js"></script>

@@ -1,87 +1,77 @@
-/**
- * Shopping cart experience
- */
 (function () {
   let cart = null;
-  const drawer = document.getElementById('cart-drawer');
-  const overlay = document.getElementById('cart-overlay');
-  const body = document.getElementById('cart-body');
-  const footer = document.getElementById('cart-footer');
-  const totalEl = document.getElementById('cart-total-price');
-  const modal = document.getElementById('checkout-modal');
+  const drawer = document.getElementById('drawer');
+  const overlay = document.getElementById('drawer-overlay');
+  const body = document.getElementById('drawer-body');
+  const footer = document.getElementById('drawer-footer');
+  const totalEl = document.getElementById('drawer-total');
+  const modal = document.getElementById('modal');
 
-  function openCart() {
+  function openDrawer() {
     drawer.classList.add('open');
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
-
-  function closeCart() {
+  function closeDrawer() {
     drawer.classList.remove('open');
     overlay.classList.remove('open');
     document.body.style.overflow = '';
   }
 
-  function renderCart() {
+  function render() {
     if (!cart) {
-      body.innerHTML = '<p class="cart-empty">No package selected yet.</p>';
+      body.innerHTML = '<p class="drawer-empty">Nothing selected yet.</p>';
       footer.hidden = true;
       return;
     }
+    const suffix = cart.id === 'website' ? '' : '/mo';
     body.innerHTML = `
-      <div class="cart-item">
+      <div class="drawer-item">
         <div>
-          <div class="cart-item-name">${cart.name}</div>
-          <button class="cart-item-remove" id="remove-item">Remove</button>
+          <div class="drawer-item-name">${cart.name}</div>
+          <button class="drawer-remove" id="remove-item">Remove</button>
         </div>
-        <div class="cart-item-price">$${cart.price.toLocaleString()}${cart.id === 'website' ? '' : '/mo'}</div>
+        <div class="drawer-item-price">$${cart.price.toLocaleString()}${suffix}</div>
       </div>
     `;
-    totalEl.textContent = '$' + cart.price.toLocaleString() + (cart.id === 'website' ? '' : '/mo');
+    totalEl.textContent = '$' + cart.price.toLocaleString() + suffix;
     footer.hidden = false;
-
-    document.getElementById('remove-item').onclick = () => {
-      cart = null;
-      renderCart();
-    };
+    document.getElementById('remove-item').onclick = () => { cart = null; render(); };
   }
 
-  document.querySelectorAll('.add-btn').forEach(btn => {
+  document.querySelectorAll('.select-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+      const card = btn.closest('.package') || btn;
       cart = {
-        id: btn.dataset.id,
-        name: btn.dataset.name,
-        price: parseInt(btn.dataset.price, 10)
+        id: btn.dataset.id || card.dataset.id,
+        name: btn.dataset.name || card.dataset.name,
+        price: parseInt(btn.dataset.price || card.dataset.price, 10)
       };
-      renderCart();
-      openCart();
+      render();
+      openDrawer();
     });
   });
 
-  document.getElementById('cart-close')?.addEventListener('click', closeCart);
-  overlay?.addEventListener('click', closeCart);
+  document.getElementById('drawer-close')?.addEventListener('click', closeDrawer);
+  overlay?.addEventListener('click', closeDrawer);
 
   document.getElementById('checkout-btn')?.addEventListener('click', () => {
-    closeCart();
+    closeDrawer();
     modal.classList.add('open');
   });
-
-  document.getElementById('modal-close')?.addEventListener('click', () => {
-    modal.classList.remove('open');
-  });
+  document.getElementById('modal-close')?.addEventListener('click', () => modal.classList.remove('open'));
 
   document.getElementById('checkout-form')?.addEventListener('submit', e => {
     e.preventDefault();
-    const form = e.target;
-    form.hidden = true;
-    document.getElementById('modal-success').hidden = false;
+    e.target.hidden = true;
+    document.getElementById('modal-ok').hidden = false;
     setTimeout(() => {
       modal.classList.remove('open');
-      form.hidden = false;
-      form.reset();
-      document.getElementById('modal-success').hidden = true;
+      e.target.hidden = false;
+      e.target.reset();
+      document.getElementById('modal-ok').hidden = true;
       cart = null;
-      renderCart();
-    }, 3200);
+      render();
+    }, 3000);
   });
 })();
