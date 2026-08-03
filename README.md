@@ -1,120 +1,51 @@
-# RS Marketing — Smooth Cinematic WebGL Experience
+# RS Marketing — Terminal/Race Experience
 
-A production-oriented React/Vite website inspired by the movement language in the supplied smooth logistics-site reference, reinterpreted for RS Marketing.
+A complete, immediately runnable RS Marketing website built around the approved Formula-car narrative:
 
-## Design direction
+1. RS car enters from the left.
+2. Camera follows the car.
+3. The rear wheel fills the screen.
+4. The wheel becomes the RS portal.
+5. A white flash reveals the bright marketing site.
+6. The same car continues through system, services, pricing, results, work, SEO Lab, and contact chapters.
 
-The reference was not copied page-for-page. Its useful principles were translated into RS Marketing's story:
+## Fastest preview
 
-- one persistent 3D centerpiece rather than unrelated hero images
-- continuous scroll-controlled camera and object movement
-- dark cinematic composition with pale glass, restrained green, and warm metallic accents
-- large kinetic typography with generous negative space
-- single-purpose sections instead of crowded dashboards
-- glass-gate, wire-network, data-pillar, package-door, orbital-telemetry, and portal transitions
-- RS Marketing's existing services, packages, masked reviews, SEO explanations, and contact information retained
+Open `index.html` directly in a modern browser. The immediate version has no build step and no external CDN dependency.
 
-## Exact stack
-
-- React + Vite
-- React Three Fiber + drei
-- Three.js
-- GSAP + ScrollTrigger
-- Lenis
-- Tailwind CSS
-
-No additional runtime dependency was added. React DOM and the official Vite/Tailwind plugins are the normal supporting packages for the requested stack.
-
-## Run locally
-
-Use Node 20.19+ or Node 22.12+.
+For the most accurate local preview, run:
 
 ```bash
-npm install
-npm run dev
+python3 -m http.server 8080
 ```
 
-Open the local Vite URL, normally `http://localhost:5173`.
+Then open `http://localhost:8080`.
 
-Production build:
+## Primary files
 
-```bash
-npm run build
-npm run preview
-```
+- `index.html` — all page content and semantic structure.
+- `styles.css` — visual design, responsive layout, intro styling, and motion system.
+- `app.js` — intro timeline, smooth car movement, service tabs, calculator, demo plan counts, telemetry canvas, and contact behavior.
+- `assets/rs-formula-car.png` — consistent high-resolution RS Formula car.
+- `assets/rs-marketing.svg` — editable vector logo.
+- `IMPLEMENTATION_MAP.md` — scene-by-scene production map.
+- `react-source/` — React/Vite version using the requested creative-development stack.
 
-## Instant no-install preview
+## Important launch edits
 
-Open:
+1. Replace `YOUR-DOMAIN.com` in `robots.txt` and `sitemap.xml`.
+2. Connect the contact form to a real form service or backend. It currently opens a prepared email to `hello.rarescore@gmail.com`.
+3. Replace masked review previews and sample result figures with verified client material.
+4. Connect pricing activity counts to real CRM/checkout data before removing the small `demo` labels.
+5. Replace the supplied pre-rendered car PNG with a studio-quality transparent render or GLB model when the final RS1 car asset is ready.
 
-```text
-preview/index.html
-```
+## Performance strategy
 
-That standalone file is a lightweight visual prototype using native canvas. It is not the production React build, but it lets you inspect the layout and transition concept without installing packages.
+- All major movement uses compositor-friendly CSS transforms.
+- The car is a high-resolution pre-rendered transparent asset, avoiding heavy real-time reflections and ray tracing.
+- The telemetry layer uses one lightweight high-DPI canvas.
+- Pixel density is capped at 2.
+- Mobile layouts simplify fixed-car animation.
+- `prefers-reduced-motion` skips the intro and disables continuous movement.
 
-## Main edit points
-
-### All content, pricing, reviews, services, projects, and articles
-
-`src/data/content.js`
-
-### Brand settings, logo, email, colors, and future 3D model path
-
-`src/data/siteConfig.js`
-
-### Continuous 3D camera/object choreography
-
-`src/experience/World.jsx`
-
-### Procedural SR-71-inspired signal craft
-
-`src/experience/SignalCraft.jsx`
-
-### Glass gate, network, pillars, package doors, orbit, and contact portal
-
-`src/experience/SceneObjects.jsx`
-
-### GSAP, ScrollTrigger, Lenis, section activation, and text reveals
-
-`src/App.jsx`
-
-### Visual system and responsive layouts
-
-`src/styles.css`
-
-## Replace the procedural aircraft with a studio model
-
-Export a compressed GLB from Blender/Cinema 4D and place it in:
-
-```text
-public/models/rs-blackbird.glb
-```
-
-The current build intentionally uses a procedural craft so the project runs without external assets. A production aircraft model should use:
-
-- one to three draw-call groups where practical
-- baked or compressed PBR textures
-- 2K textures for desktop, 1K mobile variants
-- Draco or Meshopt compression
-- clean pivots and forward direction documented in `public/models/README.md`
-
-## Performance behavior
-
-- WebGL loads lazily.
-- DPR is capped at 1.5.
-- Low-power mobile devices can receive the CSS fallback.
-- The scene uses procedural geometry, lines, points, and restrained lights rather than expensive post-processing.
-- `prefers-reduced-motion` disables smooth scrolling and replaces the WebGL scene with a static readable fallback.
-- All business content remains semantic HTML above the decorative canvas.
-
-## Truth and launch checklist
-
-The project preserves existing RS Marketing figures and masked review copy, but labels unverifiable claims in the interface and source. Before publishing:
-
-1. Verify the 4.9-star source and permissions.
-2. Verify the ad-spend figure with supporting records.
-3. Confirm every review quote and client permission.
-4. Replace demo activity notifications with a real CRM/checkout feed or remove them.
-5. Connect the form to a real endpoint instead of the current email fallback.
-6. Add final privacy policy, terms, analytics consent, and legal business details.
+A browser may animate at 120 Hz on a capable display, GPU, and browser, but no site can guarantee 120 FPS on every device.

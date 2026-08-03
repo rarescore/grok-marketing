@@ -1,0 +1,22 @@
+{
+  "name": "rs-marketing-terminal-race",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {"dev":"vite","build":"vite build","preview":"vite preview"},
+  "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.3.0",
+    "gsap": "^3.13.0",
+    "lenis": "^1.3.11",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "three": "^0.179.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.14",
+    "@vitejs/plugin-react": "^5.0.4",
+    "tailwindcss": "^4.1.14",
+    "vite": "^7.1.7"
+  }
+}
