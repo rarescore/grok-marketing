@@ -4,35 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RS MEDIA — Cinematic F‑1 Hero</title>
-  <style>
-    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#05070d;color:#fff;overflow-x:hidden}
-    section.hero{position:relative;min-height:150vh;overflow:hidden}
-    /* Layered backdrop using pure CSS so no external images are required */
-    .sky::before,
-    .guardrail::before,
-    .road::before{
-      content:'';position:absolute;inset:0;pointer-events:none;
-    }
-    .sky::before{
-      background:radial-gradient(circle at 50% -20%,rgba(0,164,239,.5),transparent 60%),#0a0f1d;
-      transform:translateZ(-2px) scale(1.2);
-    }
-    .guardrail::before{
-      background:repeating-linear-gradient(90deg,rgba(220,220,220,.22) 0 10px,transparent 10px 20px);
-      bottom:18%;height:120px;
-    }
-    .road::before{
-      background:repeating-linear-gradient(90deg,#eee 0 80px,transparent 80px 160px);
-      background-size:auto 12px;bottom:0;height:12px;
-    }
-    .headline{position:absolute;left:6%;font-size:10vw;font-weight:900;line-height:.82;text-transform:uppercase;
-             opacity:0;text-shadow:0 4px 12px rgba(0,0,0,.35);}
-    .h1{top:26%}.h2{top:42%}.h3{top:58%}
-    canvas{display:block}
-    /* fallback if JS disabled */
-    noscript .headline{opacity:1}
-  </style>
+  <title>RS MEDIA F1 Hero</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <section id="hero" class="hero">
@@ -40,73 +13,10 @@
     <div class="guardrail"></div>
     <div class="road"></div>
     <div id="canvas-wrapper"></div>
-    <div class="headline h1">ENGINEERED</div>
-    <div class="headline h2">TO BE</div>
-    <div class="headline h3">FOUND.</div>
+    <h1 class="headline h1">ENGINEERED</h1>
+    <h1 class="headline h2">TO&nbsp;BE</h1>
+    <h1 class="headline h3">FOUND.</h1>
   </section>
-<script type="module">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.159/build/three.module.js';
-import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.159/examples/jsm/loaders/GLTFLoader.js';
-import gsap from 'https://cdn.jsdelivr.net/npm/gsap@3.13.5/+esm';
-import ScrollTrigger from 'https://cdn.jsdelivr.net/npm/gsap@3.13.5/ScrollTrigger/+esm';
-gsap.registerPlugin(ScrollTrigger);
-
-const wrapper=document.getElementById('canvas-wrapper');
-const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(38,innerWidth/innerHeight,0.1,100);
-camera.position.set(4,1.1,6);
-const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});
-renderer.setSize(innerWidth,innerHeight);
-wrapper.appendChild(renderer.domElement);
-const light=new THREE.DirectionalLight(0xffffff,2.2);
-light.position.set(5,6,4);scene.add(light);
-
-// minimal ambient
-scene.add(new THREE.AmbientLight(0x666666,0.4));
-
-// load GLB (Formula‑E open source)
-const loader=new GLTFLoader();
-const wheels=[];
-loader.load('https://raw.githubusercontent.com/gkjohnson/3d-demo-data/master/models/formula_e_car/FormulaE.glb',g=>{
-  const car=g.scene;
-  car.traverse(c=>{
-    if(c.name.toLowerCase().includes('wheel')) wheels.push(c);
-  });
-  car.position.set(0,-0.34,0);
-  scene.add(car);
-});
-
-// spin wheels every frame
-let last=0;
-function animate(t){
-  const d=(t-last)/1000; last=t;
-  wheels.forEach(w=>w.rotation.x-=10*d);
-  renderer.render(scene,camera);
-  requestAnimationFrame(animate);
-}
-requestAnimationFrame(animate);
-
-// Handle resize
-addEventListener('resize',()=>{
-  camera.aspect=innerWidth/innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(innerWidth,innerHeight);
-});
-
-// ScrollTrigger timeline
-gsap.timeline({
-  scrollTrigger:{trigger:'#hero',start:'top top',end:'+=150%',scrub:true,pin:true}
-})
-.to(camera.position,{x:-5,y:1,z:4,ease:'none'},0)
-.to(camera.rotation,{y:-0.6,ease:'none'},0);
-
-// headline fades
-gsap.utils.toArray('.headline').forEach((h,i)=>{
-  const start=0.15+0.3*i;
-  gsap.fromTo(h,{opacity:0,y:30},{opacity:1,y:0,
-    scrollTrigger:{trigger:'#hero',start:`top+=${start*150}%`,end:`top+=${(start+0.28)*150}%`,scrub:true}});
-});
-</script>
-<noscript><style>.headline{opacity:1}</style></noscript>
+  <script type="module" src="main.js"></script>
 </body>
 </html>
