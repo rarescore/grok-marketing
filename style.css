@@ -1,11 +1,12 @@
 
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#05070d;color:#fff;overflow-x:hidden}
-.hero{position:relative;min-height:150vh;overflow:hidden}
-.sky,.guardrail,.road{position:absolute;inset:0;pointer-events:none}
-.sky{background:url('https://i.imgur.com/G4bJVpN.jpg') top center/cover no-repeat}
-.guardrail{background:url('https://i.imgur.com/BgvP3X7.png') repeat-x bottom 18%/auto 120px}
-.road{background:url('https://i.imgur.com/59ZpMq5.png') repeat-x bottom center/auto 12px}
-.headline{position:absolute;left:6%;font-size:10vw;font-weight:900;line-height:.82;text-transform:uppercase;
-         opacity:0}
-.h1{top:28%}.h2{top:42%}.h3{top:56%}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:#05070d;color:#fff;overflow-x:hidden}
+.hero{position:relative;height:200vh;overflow:hidden}
+.sky,.barriers,.road{position:absolute;inset:0;pointer-events:none}
+.sky{background:radial-gradient(circle at 50% -20%,rgba(0,164,239,.55),transparent 60%),#0b1020}
+.barriers{background:repeating-linear-gradient(90deg,rgba(200,200,200,.18) 0 10px,transparent 10px 20px);bottom:18%;height:120px}
+.road{background:repeating-linear-gradient(90deg,#eee 0 80px,transparent 80px 160px);background-size:auto 12px;bottom:0;height:12px}
+.headline{position:absolute;left:6%;font-size:10vw;font-weight:900;line-height:.8;text-transform:uppercase;opacity:0;text-shadow:0 4px 12px rgba(0,0,0,.4)}
+.h1{top:28%}.h2{top:44%}.h3{top:60%}
 canvas{display:block}
+.content{padding:120px 5vw}
