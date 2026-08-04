@@ -8,3 +8,54 @@
 @media(max-width:1100px){.desktop-nav{display:none}.site-header{grid-template-columns:1fr auto auto;gap:15px}.menu-button{display:block;width:42px;height:42px;border:1px solid var(--line);background:transparent;position:relative}.menu-button span{position:absolute;left:10px;right:10px;height:1px;background:#111;top:16px}.menu-button span:last-child{top:24px}.mobile-nav{display:flex;position:absolute;top:84px;left:0;right:0;background:var(--paper);padding:30px 5vw;flex-direction:column;gap:22px;border-bottom:1px solid var(--line);transform:translateY(-140%);opacity:0;transition:.45s var(--ease);z-index:-1}.mobile-nav.open{transform:none;opacity:1}.hero-content{width:58vw}.garage-grid{grid-template-columns:1fr}.garage{min-height:430px;border-right:0;border-bottom:1px solid var(--line)}.audit-section,.contact-section{grid-template-columns:1fr}.service-tabs{grid-template-columns:repeat(3,1fr)}.pricing-track{grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line)}.plan{border:0}.plan-recommended{transform:none}.recommended-badge{top:0;height:26px}.work-grid{grid-template-columns:1fr}.project-large{grid-row:auto}.project-large .browser-mockup{min-height:450px}.article-grid{grid-template-columns:repeat(2,1fr)}.article-grid article{border-bottom:1px solid var(--line)}.faq-section{grid-template-columns:1fr}.race-car-rail{width:60vw}.engine-diagram{min-height:620px}.engine-node{transform:scale(.85)}.results-head{grid-template-columns:1fr}.review-rail{grid-template-columns:1fr}.site-footer{grid-template-columns:1fr;text-align:center}.site-footer img{margin:auto}.site-footer>div{flex-wrap:wrap}.site-footer p{margin:0}}
 @media(max-width:720px){:root{--header-h:70px}.site-header{height:70px;padding:0 18px}.brand img{width:104px}.site-header>.button{display:none}.mobile-nav{top:70px}.chapter{padding:105px 20px 80px;min-height:auto}.hero{min-height:100svh;padding-top:100px;align-items:start}.hero-content{width:100%;padding:0;z-index:5}.display-heading{font-size:clamp(47px,15vw,74px);max-width:100%;margin-top:12px}.hero-lede{font-size:16px;max-width:86%;margin:25px 0}.button-row{gap:18px}.hero-microproof{display:none}.hero-car-space{right:-25%;width:115%;height:45%;bottom:4%}.scroll-cue{left:20px;bottom:18px}.platform-strip{grid-template-columns:1fr;padding:22px 20px}.platform-strip div{display:grid;grid-template-columns:repeat(3,1fr);font-size:15px;gap:15px}.section-intro h2,h2{font-size:clamp(42px,13vw,68px)}.garage-grid{margin-top:50px}.garage{padding:28px}.garage h3{margin-top:45px;font-size:34px}.audit-section{gap:40px}.audit-console{padding:24px}.audit-results{grid-template-columns:1fr}.audit-results div{border-right:0;border-bottom:1px solid rgba(255,255,255,.14)}.engine-diagram{min-height:580px;align-items:flex-start;padding-top:120px}.engine-diagram>img{width:110%;max-width:none}.engine-node{position:static;display:inline-block;width:45%;margin:8px;transform:none;text-align:left}.engine-node:before,.engine-node:after{display:none}.engine-diagram{display:block;text-align:center}.engine-detail{bottom:18px;width:90%}.service-tabs{grid-template-columns:repeat(2,1fr)}.service-stage{grid-template-columns:1fr}.service-copy{padding:35px 24px}.service-copy h3{font-size:42px}.service-copy ul{columns:1}.service-visual{min-height:380px}.pricing-track{grid-template-columns:1fr;margin-top:45px}.plan{min-height:520px}.results-dashboard{grid-template-columns:1fr 1fr}.metric:nth-child(2){border-right:0}.metric{padding:20px}.metric strong{font-size:38px}.growth-chart{padding:10px}.project footer{flex-direction:column;gap:8px}.browser-mockup,.project-large .browser-mockup{min-height:360px}.review-rail{margin-top:45px}.featured-article{grid-template-columns:1fr}.featured-article>div:first-child{padding:32px 24px}.featured-article h3{font-size:40px}.scan-visual{min-height:380px}.article-grid{grid-template-columns:1fr}.article-grid article{border-right:0}.field-pair{grid-template-columns:1fr}.contact-form{padding:28px 22px}.starting-lights{top:88px}.faq-section{padding:90px 20px}.final-screen{min-height:70vh}.final-screen h2{font-size:15vw}.race-car-rail{width:88vw}.intro-copy{top:10vh}.intro-car-wrap{width:130vw}.portal{width:320px;height:320px}.portal>img{width:110px}.intro-skip{right:12px;top:12px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}.intro{display:none!important}.site-header{transform:none}.race-car-rail{display:none}.reveal-group,.reveal-card{opacity:1!important;transform:none!important}.chart-line{stroke-dashoffset:0}}
+
+/* Performance-correct cinematic intro */
+.intro {
+  background: #f8f8f6;
+  isolation: isolate;
+}
+.intro-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  background: #f8f8f6;
+}
+.intro-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 24px;
+  background: #f8f8f6;
+}
+.intro-fallback[hidden] { display: none; }
+.intro-fallback img { width: min(260px, 55vw); }
+.intro-skip {
+  z-index: 20;
+  border-color: rgba(255,255,255,.45);
+  background: rgba(10,10,12,.38);
+  backdrop-filter: blur(12px);
+}
+.race-car-rail {
+  filter: none !important;
+  backface-visibility: hidden;
+  contain: layout paint style;
+}
+.race-car-rail img {
+  transform: translateZ(0);
+  image-rendering: auto;
+}
+.chapter,
+.faq-section,
+.platform-strip {
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
+}
+@media (max-width: 720px) {
+  .intro-video { object-position: 50% 50%; }
+}

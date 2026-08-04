@@ -4,7 +4,7 @@ A complete, immediately runnable RS Marketing website built around the approved 
 
 1. RS car enters from the left.
 2. Camera follows the car.
-3. The rear wheel fills the screen.
+3. The selected wheel fills the screen.
 4. The wheel becomes the RS portal.
 5. A white flash reveals the bright marketing site.
 6. The same car continues through system, services, pricing, results, work, SEO Lab, and contact chapters.
@@ -25,8 +25,10 @@ Then open `http://localhost:8080`.
 
 - `index.html` — all page content and semantic structure.
 - `styles.css` — visual design, responsive layout, intro styling, and motion system.
-- `app.js` — intro timeline, smooth car movement, service tabs, calculator, demo plan counts, telemetry canvas, and contact behavior.
-- `assets/rs-formula-car.png` — consistent high-resolution RS Formula car.
+- `app.js` — video handoff, event-driven car movement, service tabs, calculator, demo plan counts, and contact behavior.
+- `assets/rs-marketing-intro-1080p60.mp4` — deterministic 1920×1080, 60fps desktop intro.
+- `assets/rs-marketing-intro-mobile.mp4` — portrait 720×1558, 60fps mobile intro.
+- `assets/rs-formula-car.png` — consistent high-resolution RS Formula car used after the intro.
 - `assets/rs-marketing.svg` — editable vector logo.
 - `IMPLEMENTATION_MAP.md` — scene-by-scene production map.
 - `react-source/` — React/Vite version using the requested creative-development stack.
@@ -36,16 +38,16 @@ Then open `http://localhost:8080`.
 1. Replace `YOUR-DOMAIN.com` in `robots.txt` and `sitemap.xml`.
 2. Connect the contact form to a real form service or backend. It currently opens a prepared email to `hello.rarescore@gmail.com`.
 3. Replace masked review previews and sample result figures with verified client material.
-4. Connect pricing activity counts to real CRM/checkout data before removing the small `demo` labels.
+4. Connect pricing activity counts to real CRM/checkout data before presenting them as verified customer activity.
 5. Replace the supplied pre-rendered car PNG with a studio-quality transparent render or GLB model when the final RS1 car asset is ready.
 
 ## Performance strategy
 
-- All major movement uses compositor-friendly CSS transforms.
-- The car is a high-resolution pre-rendered transparent asset, avoiding heavy real-time reflections and ray tracing.
-- The telemetry layer uses one lightweight high-DPI canvas.
-- Pixel density is capped at 2.
-- Mobile layouts simplify fixed-car animation.
+- The cinematic opening is hardware-decoded H.264 instead of a bitmap scaled by JavaScript.
+- Separate desktop and portrait mobile encodes prevent destructive cropping.
+- The persistent page car uses transform and opacity only.
+- The animation loop sleeps while the page is idle.
+- Offscreen sections use `content-visibility` to reduce rendering work.
 - `prefers-reduced-motion` skips the intro and disables continuous movement.
 
 A browser may animate at 120 Hz on a capable display, GPU, and browser, but no site can guarantee 120 FPS on every device.

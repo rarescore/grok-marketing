@@ -14,25 +14,23 @@
 
   <div class="intro" id="intro" aria-label="RS Marketing race car introduction">
     <button class="intro-skip" id="intro-skip" type="button">Skip intro</button>
-    <div class="intro-sky"></div>
-    <div class="intro-barriers" aria-hidden="true"></div>
-    <div class="intro-track" aria-hidden="true"><i></i><i></i><i></i></div>
-    <div class="intro-copy" aria-hidden="true">
-      <span>RS / PERFORMANCE SYSTEMS</span>
-      <strong>ENGINEERED TO BE FOUND.</strong>
+    <video
+      class="intro-video"
+      id="intro-video"
+      muted
+      autoplay
+      playsinline
+      preload="auto"
+      data-desktop-src="assets/rs-marketing-intro-1080p60.mp4"
+      data-mobile-src="assets/rs-marketing-intro-mobile.mp4"
+      data-desktop-poster="assets/intro-poster.jpg"
+      data-mobile-poster="assets/intro-poster-mobile.jpg"
+      aria-hidden="true"
+    ></video>
+    <div class="intro-fallback" id="intro-fallback" hidden>
+      <img src="assets/rs-marketing.svg" alt="RS Marketing" />
+      <button class="button" id="intro-enter" type="button">Enter the site <span>↗</span></button>
     </div>
-    <div class="intro-car-wrap" id="intro-car-wrap" aria-hidden="true">
-      <img class="intro-car" src="assets/rs-formula-car.png" alt="" />
-      <div class="wheel-spin wheel-spin-front"></div>
-      <div class="wheel-spin wheel-spin-rear"></div>
-    </div>
-    <div class="portal" id="portal" aria-hidden="true">
-      <div class="portal-rings"><i></i><i></i><i></i><i></i></div>
-      <img src="assets/rs-marketing.svg" alt="" />
-      <span>LOADING THE GROWTH SYSTEM</span>
-      <b id="loader-count">0%</b>
-    </div>
-    <div class="white-flash" id="white-flash"></div>
   </div>
 
   <header class="site-header" id="header">
@@ -48,7 +46,6 @@
   </header>
 
   <div class="page-progress" aria-hidden="true"><span id="page-progress"></span></div>
-  <canvas id="telemetry-canvas" aria-hidden="true"></canvas>
 
   <main id="main">
     <section class="hero chapter" id="home" data-car-x="57" data-car-y="66" data-car-scale="0.64" data-car-opacity="1">
