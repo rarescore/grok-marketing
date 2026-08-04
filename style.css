@@ -1,12 +1,14 @@
-
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,Helvetica,sans-serif;background:#05070d;color:#fff;overflow-x:hidden}
-.hero{position:relative;height:200vh;overflow:hidden}
-.sky,.barriers,.road{position:absolute;inset:0;pointer-events:none}
-.sky{background:radial-gradient(circle at 50% -20%,rgba(0,164,239,.55),transparent 60%),#0b1020}
-.barriers{background:repeating-linear-gradient(90deg,rgba(200,200,200,.18) 0 10px,transparent 10px 20px);bottom:18%;height:120px}
-.road{background:repeating-linear-gradient(90deg,#eee 0 80px,transparent 80px 160px);background-size:auto 12px;bottom:0;height:12px}
-.headline{position:absolute;left:6%;font-size:10vw;font-weight:900;line-height:.8;text-transform:uppercase;opacity:0;text-shadow:0 4px 12px rgba(0,0,0,.4)}
-.h1{top:28%}.h2{top:44%}.h3{top:60%}
-canvas{display:block}
-.content{padding:120px 5vw}
+:root{--blue:#00a4ef;--pink:#fd4084;--ink:#05070b;--paper:#f5f7fb}
+*{box-sizing:border-box}html,body{margin:0;background:var(--ink);font-family:Arial,Helvetica,sans-serif;color:#fff;overflow-x:hidden}a{color:inherit;text-decoration:none}
+.progress{position:fixed;left:0;top:0;height:3px;width:100%;transform-origin:left;z-index:100;background:linear-gradient(90deg,var(--blue),var(--pink))}
+nav{position:fixed;z-index:50;left:0;right:0;top:0;height:78px;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;border-bottom:1px solid rgba(255,255,255,.14);background:rgba(3,5,9,.28);backdrop-filter:blur(14px)}
+.brand{font-weight:950;letter-spacing:.12em}.brand span{color:var(--blue)}.links{display:flex;gap:26px;font-size:11px;text-transform:uppercase;letter-spacing:.12em}.cta{border:1px solid rgba(255,255,255,.28);padding:12px 18px;border-radius:999px;font-size:12px;font-weight:800}
+.hero{height:480vh}.sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:radial-gradient(circle at 65% 25%,#18314a,#05070b 70%)}canvas{position:absolute;inset:0;width:100%;height:100%}
+.overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.72),transparent 65%),linear-gradient(0deg,rgba(0,0,0,.45),transparent 45%);pointer-events:none}
+.copy{position:absolute;left:5vw;top:50%;transform:translateY(-50%);z-index:4}.copy p,.eyebrow{font-size:11px;letter-spacing:.22em;color:#c8d2de}.copy h1,.content h2,.pricing h2{font-family:Impact,Arial Black,sans-serif;font-size:clamp(60px,9vw,150px);line-height:.8;letter-spacing:-.06em;margin:22px 0;text-transform:uppercase}.copy h1 span{color:var(--blue)}.sub{color:#d5dce6;font-size:18px}
+.telemetry{position:absolute;right:4vw;bottom:5vh;z-index:5;display:grid;gap:10px;padding:18px;background:rgba(4,7,13,.55);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(12px);font-family:monospace}.telemetry div{display:flex;gap:45px;justify-content:space-between}.telemetry small{color:#8491a2}
+.content,.pricing{padding:110px 6vw}.content{background:var(--paper);color:#0a1020}.content .eyebrow,.pricing .eyebrow{color:#007ebd}.content h2,.pricing h2{font-size:clamp(54px,7vw,110px)}
+.cards,.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:60px}.cards article{background:#fff;border:1px solid #d8dee7;padding:30px;min-height:280px}.cards span{color:#007ebd}.cards h3{font-size:28px;margin-top:85px}.cards p{color:#657083;line-height:1.6}
+.pricing{background:#080b12}.plans{grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.14)}.plans article{background:#0d121c;padding:28px;min-height:330px}.plans .featured{background:linear-gradient(180deg,rgba(0,164,239,.18),rgba(253,64,132,.09)),#0d121c}.plans h3{font-size:34px;margin-top:60px}.plans p{color:#aeb8c7;line-height:1.6}
+.contact{display:grid;grid-template-columns:1.1fr .9fr;gap:60px}form{background:#fff;padding:28px;border:1px solid #d8dee7;display:grid;gap:14px}input,textarea{padding:14px;border:1px solid #d4dae4;background:#f8fafc;font:inherit}button{padding:16px;border:0;background:#0a1020;color:#fff;font-weight:900}footer{padding:36px 6vw;background:#05070b;color:#9ba7b7;display:flex;justify-content:space-between}
+@media(max-width:900px){.links{display:none}.telemetry{display:none}.cards,.plans,.contact{grid-template-columns:1fr}.copy h1{font-size:18vw}}
